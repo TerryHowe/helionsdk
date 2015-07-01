@@ -20,10 +20,10 @@ the helionsdk plugin.
 import os
 import sys
 
-import os_client_config
-
 from openstack import connection
 from openstack import profile
+import os_client_config
+
 from helionsdk import hp
 
 

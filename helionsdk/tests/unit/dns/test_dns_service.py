@@ -10,23 +10,20 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from openstack import resource
+import testtools
 
 from helionsdk.dns import dns_service
 
 
-class Version(resource.Resource):
-    resource_key = 'version'
-    resources_key = 'versions'
-    base_path = '/'
-    service = dns_service.DnsService(
-        version=dns_service.DnsService.UNVERSIONED
-    )
+class TestDnsService(testtools.TestCase):
 
-    # capabilities
-    allow_list = True
-
-    # Properties
-    links = resource.prop('links')
-    status = resource.prop('status')
-    updated = resource.prop('updated')
+    def test_service(self):
+        sot = dns_service.DnsService()
+        self.assertEqual('hpext', sot.vendor)
+        self.assertEqual('dns', sot.service_type)
+        self.assertEqual('public', sot.visibility)
+        self.assertIsNone(sot.region)
+        self.assertIsNone(sot.service_name)
+        self.assertEqual(1, len(sot.valid_versions))
+        self.assertEqual('v1', sot.valid_versions[0].module)
+        self.assertEqual('v1', sot.valid_versions[0].path)

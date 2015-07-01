@@ -10,8 +10,9 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from helionsdk.dns import dns_service
 from openstack import resource
+
+from helionsdk.dns import dns_service
 
 
 class Domain(resource.Resource):
