@@ -18,12 +18,12 @@ from helionsdk.dns import dns_service
 class TestDnsService(testtools.TestCase):
 
     def test_service(self):
-        sot = dns_service.DnsService()
-        self.assertEqual('hpext', sot.vendor)
-        self.assertEqual('dns', sot.service_type)
-        self.assertEqual('public', sot.visibility)
-        self.assertIsNone(sot.region)
-        self.assertIsNone(sot.service_name)
-        self.assertEqual(1, len(sot.valid_versions))
-        self.assertEqual('v1', sot.valid_versions[0].module)
-        self.assertEqual('v1', sot.valid_versions[0].path)
+        sut = dns_service.DnsService()
+        self.assertEqual('hpext', sut.vendor)
+        self.assertEqual('dns', sut.service_type)
+        self.assertEqual('public', sut.visibility)
+        self.assertIsNone(sut.region)
+        self.assertIsNone(sut.service_name)
+        self.assertEqual(1, len(sut.valid_versions))
+        self.assertEqual('v1', sut.valid_versions[0].module)
+        self.assertEqual('v1', sut.valid_versions[0].path)

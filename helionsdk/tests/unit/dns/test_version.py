@@ -25,19 +25,19 @@ EXAMPLE = {
 class TestVersion(testtools.TestCase):
 
     def test_basic(self):
-        sot = version.Version()
-        self.assertEqual('version', sot.resource_key)
-        self.assertEqual('versions', sot.resources_key)
-        self.assertEqual('/', sot.base_path)
-        self.assertEqual('dns', sot.service.service_type)
-        self.assertFalse(sot.allow_create)
-        self.assertFalse(sot.allow_retrieve)
-        self.assertFalse(sot.allow_update)
-        self.assertFalse(sot.allow_delete)
-        self.assertTrue(sot.allow_list)
+        sut = version.Version()
+        self.assertEqual('version', sut.resource_key)
+        self.assertEqual('versions', sut.resources_key)
+        self.assertEqual('/', sut.base_path)
+        self.assertEqual('dns', sut.service.service_type)
+        self.assertFalse(sut.allow_create)
+        self.assertFalse(sut.allow_retrieve)
+        self.assertFalse(sut.allow_update)
+        self.assertFalse(sut.allow_delete)
+        self.assertTrue(sut.allow_list)
 
     def test_make_it(self):
-        sot = version.Version(EXAMPLE)
-        self.assertEqual(EXAMPLE['id'], sot.id)
-        self.assertEqual(EXAMPLE['links'], sot.links)
-        self.assertEqual(EXAMPLE['status'], sot.status)
+        sut = version.Version(EXAMPLE)
+        self.assertEqual(EXAMPLE['id'], sut.id)
+        self.assertEqual(EXAMPLE['links'], sut.links)
+        self.assertEqual(EXAMPLE['status'], sut.status)
