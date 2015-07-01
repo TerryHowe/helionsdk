@@ -33,7 +33,7 @@ def main(argv=sys.argv[1:]):
     auth = cloud.config['auth']
     prof = profile.Profile(extensions=hp.extensions)
     conn = connection.Connection(profile=prof, **auth)
-    for domain in conn.dns.list_domains():
+    for domain in conn.dns.domains():
         print(str(domain))
 
 
