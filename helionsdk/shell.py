@@ -24,13 +24,14 @@ import os_client_config
 
 from openstack import connection
 from openstack import profile
+from helionsdk import hp
 
 
 def main(argv=sys.argv[1:]):
     os_cloud = os.environ.get('OS_CLOUD')
     cloud = os_client_config.OpenStackConfig().get_one_cloud(os_cloud)
     auth = cloud.config['auth']
-    prof = profile.Profile(extensions=['helionsdk.dns'])
+    prof = profile.Profile(extensions=hp.extensions)
     conn = connection.Connection(profile=prof, **auth)
     for domain in conn.dns.list_domains():
         print(str(domain))
