@@ -17,21 +17,70 @@ from helionsdk.dns.v1 import domain
 
 class Proxy(proxy.BaseProxy):
 
-    # TODO(thowe): Convert these to new format
-    def create_domain(self, **data):
-        return domain.Domain(data).create(self.session)
+    def create_domain(self, **attrs):
+        """Create a new domain from attributes
 
-    def delete_domain(self, **data):
-        domain.Domain(data).delete(self.session)
+        :param dict attrs: Keyword arguments which will be used to create
+                           a :class:`~helionsdk.domain.v1.domain.Domain`,
+                           comprised of the properties on the Domain class.
+
+        :returns: The results of domain creation
+        :rtype: :class:`~helionsdk.domain.v1.domain.Domain`
+        """
+        return self._create(domain.Domain, **attrs)
+
+    def delete_domain(self, value, ignore_missing=True):
+        """Delete a domain
+
+        :param value: The value can be either the ID of a domain or a
+                      :class:`~helionsdk.domain.v1.domain.Domain` instance.
+        :param bool ignore_missing: When set to ``False``
+                    :class:`~helionsdk.exceptions.ResourceNotFound` will be
+                    raised when the domain does not exist.
+                    When set to ``True``, no exception will be set when
+                    attempting to delete a nonexistent domain.
+
+        :returns: ``None``
+        """
+        self._delete(domain.Domain, value, ignore_missing)
 
     def find_domain(self, name_or_id):
+        """Find a single domain
+
+        :param name_or_id: The name or ID of a domain.
+        :returns: One :class:`~helionsdk.compute.v1.domain.Domain` or None
+        """
         return domain.Domain.find(self.session, name_or_id)
 
-    def get_domain(self, **data):
-        return domain.Domain(data).get(self.session)
+    def get_domain(self, value):
+        """Get a single domain
 
-    def list_domains(self):
-        return domain.Domain.list(self.session)
+        :param value: The value can be the ID of a domain or a
+                      :class:`~helionsdk.domain.v1.domain.Domain` instance.
 
-    def update_domain(self, **data):
-        return domain.Domain(data).update(self.session)
+        :returns: One :class:`~helionsdk.domain.v1.domain.Domain`
+        :raises: :class:`~helionsdk.exceptions.ResourceNotFound`
+                 when no resource can be found.
+        """
+        return self._get(domain.Domain, value)
+
+    def domains(self):
+        """Return a generator of domains
+
+        :returns: A generator of domain objects
+        :rtype: :class:`~helionsdk.domain.v1.domain.Domain`
+        """
+        return self._list(domain.Domain)
+
+    def update_domain(self, value, **attrs):
+        """Update a domain
+
+        :param value: Either the id of a domain or a
+                      :class:`~helionsdk.domain.v1.domain.Domain` instance.
+        :attrs kwargs: The attributes to update on the domain represented
+                       by ``value``.
+
+        :returns: The updated domain
+        :rtype: :class:`~helionsdk.domain.v1.domain.Domain`
+        """
+        return self._update(domain.Domain, value, **attrs)
