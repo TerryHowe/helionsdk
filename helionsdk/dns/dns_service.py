@@ -10,13 +10,16 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from openstack import proxy
+from openstack.auth import service_filter
 
 
-class Proxy(proxy.BaseProxy):
+class DnsService(service_filter.ServiceFilter):
+    """The DNS service."""
 
-    def return_hello(self, **data):
-        return "Hello"
+    valid_versions = [service_filter.ValidVersion('v1')]
 
-    def return_goodbye(self, **data):
-        return "Goodbye"
+    def __init__(self, version=None):
+        """Create a DNS service."""
+        super(DnsService, self).__init__(service_type='dns',
+                                         vendor='hpext',
+                                         version=version)

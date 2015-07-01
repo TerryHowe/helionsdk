@@ -2,6 +2,6 @@
 Usage
 ========
 
-To use openstacksdk-plugin in a project::
+To use helionsdk in a project::
 
-    import openstacksdk_plugin
+    import helionsdk

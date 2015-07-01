@@ -10,18 +10,19 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-import mock
 import testtools
 
-from openstacksdk_plugin.example.v1 import _proxy
+from helionsdk.dns import dns_service
 
 
-class TestExampleProxy(testtools.TestCase):
-    def setUp(self):
-        super(TestExampleProxy, self).setUp()
-        self.session = mock.MagicMock()
-        self.proxy = _proxy.Proxy(self.session)
+class TestDnsService(testtools.TestCase):
 
-    def test_everything(self):
-        self.assertEqual('Hello', self.proxy.return_hello())
-        self.assertEqual('Goodbye', self.proxy.return_goodbye())
+    def test_service(self):
+        sot = dns_service.DnsService()
+        self.assertEqual('hpext:dns', sot.service_type)
+        self.assertEqual('public', sot.visibility)
+        self.assertIsNone(sot.region)
+        self.assertIsNone(sot.service_name)
+        self.assertEqual(1, len(sot.valid_versions))
+        self.assertEqual('v1', sot.valid_versions[0].module)
+        self.assertEqual('v1', sot.valid_versions[0].path)

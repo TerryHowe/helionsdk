@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
 # a copy of the License at
@@ -10,18 +12,8 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-from openstack.auth import service_filter
+import pbr.version
 
 
-class ExampleService(service_filter.ServiceFilter):
-    """The example service extension."""
-
-    valid_versions = [service_filter.ValidVersion('v1')]
-
-    def __init__(self, version=None):
-        """Create an example service
-
-        The service_type should match what is specified in the service catalog.
-        """
-        super(ExampleService, self).__init__(service_type='vendor:service',
-                                             version=version)
+__version__ = pbr.version.VersionInfo(
+    'helionsdk').version_string()

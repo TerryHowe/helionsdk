@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 # Licensed under the Apache License, Version 2.0 (the "License"); you may
 # not use this file except in compliance with the License. You may obtain
 # a copy of the License at
@@ -12,8 +10,22 @@
 # License for the specific language governing permissions and limitations
 # under the License.
 
-import pbr.version
+from helionsdk.dns import dns_service
+from openstack import resource
 
 
-__version__ = pbr.version.VersionInfo(
-    'openstacksdk_plugin').version_string()
+class Version(resource.Resource):
+    resource_key = 'version'
+    resources_key = 'versions'
+    base_path = '/'
+    service = dns_service.DnsService(
+        version=dns_service.DnsService.UNVERSIONED
+    )
+
+    # capabilities
+    allow_list = True
+
+    # Properties
+    links = resource.prop('links')
+    status = resource.prop('status')
+    updated = resource.prop('updated')

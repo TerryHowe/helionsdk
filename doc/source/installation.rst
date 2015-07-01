@@ -4,9 +4,9 @@ Installation
 
 At the command line::
 
-    $ pip install openstacksdk-plugin
+    $ pip install helionsdk
 
 Or, if you have virtualenvwrapper installed::
 
-    $ mkvirtualenv openstacksdk-plugin
-    $ pip install openstacksdk-plugin
+    $ mkvirtualenv helionsdk
+    $ pip install helionsdk
